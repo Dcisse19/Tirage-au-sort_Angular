@@ -1,0 +1,16 @@
+header{
+    background: var(--red);
+    /* padding: 23px 122px; */
+}
+section{
+    justify-content: flex-end;
+    width: min(1390px, 95%);
+    height: 70px;
+}
+nav {
+    gap: 50px;
+}
+nav a {
+    color: var(--white);
+    font-size: clamp(13pw,3vw,16px);
+}

@@ -1,0 +1,14 @@
+footer{
+    background: var(--red);
+    width: 100%;
+    /* padding: 23px 122px; */
+}
+section{
+    margin: 0 auto;
+    height: 70px;
+}
+
+section p {
+    color: white;
+    font-size: clamp(13px,3vw,16px);
+}

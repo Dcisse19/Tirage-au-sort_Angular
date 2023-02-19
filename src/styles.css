@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --red : #CE0033;
+    --grey : #F0F0F0;
+    --white : #FFFFFF;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    /* overflow-x: hidden; */
+    font-family: 'Poppins', sans-serif;
+    width: min(1512px,100%);
+    background: var(--grey);
+}
+main{
+    margin: 0 auto;
+    width: min(1200px,95%);
+    margin: 100px auto;
+}
+
+img{
+    display: block;
+    max-width: 100%;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+.bold{
+    font-weight: 700;
+}
+/* a:hover{
+    opacity: .7;
+} */
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.column {
+    flex-direction: column;
+}
+
+button {
+    border: none;
+    background : white;
+    cursor: pointer;
+}

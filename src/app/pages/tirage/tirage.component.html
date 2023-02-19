@@ -1,0 +1,11 @@
+<section class="flex column">
+    <button (click)="getRandomStudent()" id="select-button" class="flex"><angular-emojis [name]="'slot_machine'" size="30"></angular-emojis>Sélectionner une
+        personne<angular-emojis [name]="'slot_machine'" size="30"></angular-emojis></button>
+    <div id="text-area" class="flex column">
+        <p *ngIf="!randomStudent">Personne n'a été selectionné actuellement.<angular-emojis [name]="'eyes'"></angular-emojis></p>
+        <div *ngIf="randomStudent" class="flex column">
+            <p class="bold">{{randomStudent.name}}<angular-emojis [name]="'cherry_blossom'" size="20"></angular-emojis></p>
+            <p>{{congratsSentence}}</p>
+        </div>
+    </div>
+</section>

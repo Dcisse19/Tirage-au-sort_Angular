@@ -1,0 +1,20 @@
+section {
+    gap: 45px;
+}
+#select-button {
+    background: var(--red);
+    border-radius: 60px;
+    padding: 20px 60px;
+    color: var(--white);
+    font-weight:700;
+    font-size: 20px;
+    gap: 5px;
+}
+
+#text-area {
+    background: var(--white);
+    width: min(896px, 95%);
+    width: 896px;
+    min-height: 354px;
+    font-size: 20px;
+}
