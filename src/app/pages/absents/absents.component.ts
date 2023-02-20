@@ -11,7 +11,6 @@ import { StudentsService } from 'src/app/services/students/students.service';
 })
 export class AbsentsComponent {
   students: Student[] = STUDENT;
-  presentStudents!: Student[];
   absents: Student[] = [];
   absentes: Student[] = [];
   absentStudent!: Student;
@@ -22,24 +21,20 @@ export class AbsentsComponent {
     private formBuilder: FormBuilder,
     private router: Router) { }
 
-  ngOnInit() {
-    this.getPresentStudents();
-    this.getAbsentStudents();
-    this.initAbsentForm();
-  }
+    presentStudents: Student[] = this.studentService.presentStudents;
+
+    ngOnInit(){
+      this.initAbsentForm();
+      this.getAbsentStudents()
+    }
+
 
   initAbsentForm() {
     this.absentForm = this.formBuilder.group({
       absent_name: [null]
     })
   }
-  getPresentStudents() : Student[] {
-    const presence = this.students.filter((std: Student) => std.here === true);
-    if (presence) {
-      this.presentStudents = presence;
-    }
-    return presence;
-  }
+
 
   getAbsentStudents() {
     const absence = this.students.filter((std: Student) => std.here === false);
@@ -83,7 +78,6 @@ export class AbsentsComponent {
     if(student){
       student.here = true;
     }
-    this.getPresentStudents();
     this.getAbsentStudents();
     this.reloadCurrentRoute();
   }

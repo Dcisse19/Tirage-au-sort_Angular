@@ -1,7 +1,7 @@
 <section id="main-section" class="flex">
     <section id="addAbsent" class="flex column">
         <h2>Ajouter un absent</h2>
-        <form [formGroup]="absentForm" id="addAbsent-form" action="" class="flex column">
+        <form *ngIf="presentStudents" [formGroup]="absentForm" id="addAbsent-form" action="" class="flex column">
             <select formControlName="absent_name" id="">
                 <option selected>Sélectionner une personne</option>
                 <option *ngFor="let student of presentStudents" value="{{student.id}}">{{student.name}}</option>

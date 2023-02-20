@@ -9,7 +9,7 @@ export class StudentsService {
   students: Student[] = STUDENT;
   presentStudents :Student[] = [];
    
-  
+
   constructor() { }
   getPresentStudents() : Student[] {
     const presence = this.students.filter((std: Student) => std.here === true);
@@ -18,4 +18,6 @@ export class StudentsService {
     }
     return presence;
   }
+
+  
 }
