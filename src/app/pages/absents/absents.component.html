@@ -3,7 +3,7 @@
         <h2>Ajouter un absent</h2>
         <form [formGroup]="absentForm" id="addAbsent-form" action="" class="flex column">
             <select formControlName="absent_name" id="">
-                <option disabled selected>Sélectionner une personne</option>
+                <option selected>Sélectionner une personne</option>
                 <option *ngFor="let student of presentStudents" value="{{student.id}}">{{student.name}}</option>
             </select>
             <button id="add-button" type="submit" (click)="markAbsent()">Ajouter</button>
@@ -24,7 +24,7 @@
             <h3>Liste des absentes</h3>
             <p *ngIf="absentes.length < 1">Aucune absente</p>
             <ul *ngIf="absentes">
-                <li *ngFor="let absente of absentes">{{absente.name}}</li>
+                <li *ngFor="let absente of absentes">{{absente.name}}<button (click)="markPresent(absente.id)" class="delete-button">x</button></li>
             </ul>
         </div>
     </section>

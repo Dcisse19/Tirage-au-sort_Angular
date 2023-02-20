@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { STUDENT, Student } from 'src/app/mocks/students.mock';
+import { AbsentsComponent } from '../absents/absents.component';
 
 @Component({
   selector: 'app-tirage',
@@ -9,10 +10,14 @@ import { STUDENT, Student } from 'src/app/mocks/students.mock';
 export class TirageComponent {
 
   students: Student [] = STUDENT;
+  presentStudents: Student[] = [];
   studentsTwo: Student[] = [];
   randomStudent! : Student;
   congratsSentence!: string;
     
+  constructor(
+    // private absentComponent = AbsentsComponent
+  ){ }
   getRandomStudent(){
     if(this.students.length > 0){
       const randIndex = Math.floor(Math.random() * this.students.length);

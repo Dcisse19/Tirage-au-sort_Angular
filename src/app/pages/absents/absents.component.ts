@@ -30,12 +30,12 @@ export class AbsentsComponent {
       absent_name: [null]
     })
   }
-  getPresentStudents() {
+  getPresentStudents() : Student[] {
     const presence = this.students.filter((std: Student) => std.here === true);
     if (presence) {
       this.presentStudents = presence;
     }
-    // console.log(this.presentStudents);
+    return presence;
   }
 
   getAbsentStudents() {
@@ -60,18 +60,18 @@ export class AbsentsComponent {
 
 
   markAbsent() {
-    const id = this.absentForm.value.absent_name;
+    const id = +this.absentForm.value.absent_name;
     console.log("id absent : ",id);
     const absentStudent = this.students.find((student:Student) => student.id === id);
     if(absentStudent){
-      console.log(absentStudent);
-      //absentStudent = this.absentStudent;
-      // absentStudent.here = false;
-      // if (absentStudent.genre === "female") {
-      //   this.absentes.push(absentStudent);
-      // } else if (absentStudent.genre === "male") {
-      //   this.absents.push(absentStudent);
-      // }
+      // console.log(absentStudent);
+      this.absentStudent = absentStudent;
+      this.absentStudent.here = false;
+      if (this.absentStudent.genre === "female") {
+        this.absentes.push(this.absentStudent);
+      } else if (absentStudent.genre === "male") {
+        this.absents.push(this.absentStudent);
+      }
     }
     this.reloadCurrentRoute();
   }
