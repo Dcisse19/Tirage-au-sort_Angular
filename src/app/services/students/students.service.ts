@@ -6,26 +6,55 @@ import { STUDENT, Student } from 'src/app/mocks/students.mock';
 })
 export class StudentsService {
 
-  students: Student[] = STUDENT;
-  presentStudents :Student[] = [];
-  absentStudents :Student[] = [];
-   
+  students1: Student[] = STUDENT;
+  students: Student[] = [];
+  presentStudents: Student[] = [];
+  absentStudents: Student[] = [];
+  absents: Student[] = [];
+  absentes: Student[] = [];
 
-  constructor() { }
+  constructor() {}
+
+  // ngOnInit(){
+  //   this.transferStudents();
+  // }
+
+  transferStudents(): Student[] {{
+    this.students1.forEach(student =>{
+      this.students.push(student);
+    })
+    return this.students;
+  }
+}
   getPresentStudents() : Student[] {
     const presence = this.students.filter((std: Student) => std.here === true);
     if (presence) {
       this.presentStudents = presence;
     }
-    return presence;
+    return this.presentStudents;
   }
 
-  getAbsentStudents() : Student[] {
-    const absence = this.students.filter((std: Student) => std.here === false);
-    if (absence) {
-      this.absentStudents = absence;
+  // getAbsents(){
+  //   const absence = this.students.filter((std: Student) => std.here === false);
+  //   if (absence) {
+  //     this.absentStudents = absence;
+  //   }
+  // }
+
+  getAbsentStudents() {
+    const absences = this.students.filter((std: Student) => std.here === false);
+    if (absences) {
+      this.insertAbsentStudent(absences);
     }
-    return absence;
   }
-  
+  insertAbsentStudent(absentList:Student[]) {
+    absentList.forEach(absent => {
+      if (absent.genre === "female") {
+        this.absentes.push(absent);
+      } else if (absent.genre === "male") {
+        this.absents.push(absent);
+      }
+    });
+  }
+
 }

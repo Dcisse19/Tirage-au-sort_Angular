@@ -1,10 +1,10 @@
 <section id="main-section" class="flex">
     <section id="addAbsent" class="flex column">
         <h2>Ajouter un absent</h2>
-        <form *ngIf="presentStudents" [formGroup]="absentForm" id="addAbsent-form" action="" class="flex column">
+        <form *ngIf="this.studentService.presentStudents" [formGroup]="absentForm" id="addAbsent-form" action="" class="flex column">
             <select formControlName="absent_name" id="">
                 <option selected>Sélectionner une personne</option>
-                <option *ngFor="let student of presentStudents" value="{{student.id}}">{{student.name}}</option>
+                <option *ngFor="let student of this.studentService.presentStudents" value="{{student.id}}">{{student.name}}</option>
             </select>
             <button id="add-button" type="submit" (click)="markAbsent()">Ajouter</button>
         </form>
@@ -15,16 +15,16 @@
     <section id="absentList">
         <div>
             <h3>Liste des absents</h3>
-            <p *ngIf="absents.length < 1">Aucun absent</p>
-            <ul *ngIf="absents">
-                <li *ngFor="let absent of absents">{{absent.name}} <button (click)="markPresent(absent.id)" class="delete-button">x</button></li> 
+            <p *ngIf="this.studentService.absents.length < 1">Aucun absent</p>
+            <ul *ngIf="this.studentService.absents">
+                <li *ngFor="let absent of this.studentService.absents">{{absent.name}} <button (click)="markPresent(absent.id)" class="delete-button">x</button></li> 
             </ul>
         </div>
         <div>
             <h3>Liste des absentes</h3>
-            <p *ngIf="absentes.length < 1">Aucune absente</p>
-            <ul *ngIf="absentes">
-                <li *ngFor="let absente of absentes">{{absente.name}}<button (click)="markPresent(absente.id)" class="delete-button">x</button></li>
+            <p *ngIf="this.studentService.absentes.length < 1">Aucune absente</p>
+            <ul *ngIf="this.studentService.absentes">
+                <li *ngFor="let absente of this.studentService.absentes">{{absente.name}}<button (click)="markPresent(absente.id)" class="delete-button">x</button></li>
             </ul>
         </div>
     </section>

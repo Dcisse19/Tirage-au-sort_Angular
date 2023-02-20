@@ -13,8 +13,7 @@ export class AppComponent {
 constructor(private studentService : StudentsService){
 }
   ngOnInit(){
-    this.studentService.getPresentStudents();
-    this.studentService.getAbsentStudents();
+    this.studentService.transferStudents();
   }
 }
 

@@ -10,24 +10,21 @@ import { StudentsService } from 'src/app/services/students/students.service';
   styleUrls: ['./absents.component.css']
 })
 export class AbsentsComponent {
-  students: Student[] = STUDENT;
-  absents: Student[] = [];
-  absentes: Student[] = [];
   absentStudent!: Student;
   absentForm!: FormGroup;
 
   constructor(
-    private studentService: StudentsService,
+    public studentService: StudentsService,
     private formBuilder: FormBuilder,
     private router: Router) { }
 
-    presentStudents: Student[] = this.studentService.presentStudents;
-    absentStudents: Student[] = this.studentService.absentStudents;
 
-    ngOnInit(){
-      this.initAbsentForm();
-      this.insertAbsentStudent();
-    }
+  ngOnInit() {
+    this.studentService.getPresentStudents();
+    this.studentService.getAbsentStudents();
+    console.log("first : ",this.studentService.students);
+    this.initAbsentForm();
+  }
 
 
   initAbsentForm() {
@@ -36,46 +33,55 @@ export class AbsentsComponent {
     })
   }
 
-  insertAbsentStudent(){
-     this.absentStudents.forEach(absent => {
-      if(absent.genre === "female"){
-        this.absentes.push(absent);
-      } else if(absent.genre === "male"){
-        this.absents.push(absent);
-      } 
-    });
-  }
-
 
   markAbsent() {
     const id: number = +this.absentForm.value.absent_name;
-    console.log("id absent : ",id);
-    const absentStudent = this.students.find((student:Student) => student.id === id);
-    if(absentStudent){
+    console.log("id absent : ", id);
+    const absentStudent = this.studentService.students.find((student: Student) => student.id === id);
+    if (absentStudent) {
       // console.log(absentStudent);
       this.absentStudent = absentStudent;
       this.absentStudent.here = false;
       if (this.absentStudent.genre === "female") {
-        this.absentes.push(this.absentStudent);
+        this.studentService.absentes.push(this.absentStudent);
       } else if (absentStudent.genre === "male") {
-        this.absents.push(this.absentStudent);
+        this.studentService.absents.push(this.absentStudent);
       }
+      this.studentService.getPresentStudents()    
+      // this.reloadCurrentRoute();
     }
-    this.reloadCurrentRoute();
   }
 
-  markPresent(id:number) {
-    const student = this.students.find((student:Student) => student.id === id);
-    if(student){
-      student.here = true;
+  markPresent(id: number) {
+    console.log("before : ",this.studentService.students);
+    const student = this.studentService.students.find((student: Student) => student.id === id);
+    if (student) {
+      const index = this.studentService.students.indexOf(student);
+      console.log("index : ", index);
+      this.studentService.students[index].here = true;
+      this.removeFromAbsent(student);
+      console.log("after : ",this.studentService.students);
+      this.studentService.getPresentStudents()
     }
-    this.reloadCurrentRoute();
+  }
+
+  removeFromAbsent(std: Student) {
+    if (std.genre === "female") {
+      const index = this.studentService.absentes.indexOf(std);
+      this.studentService.absentes.splice(index, 1);
+    } else if (std.genre === "male") {
+      const index = this.studentService.absents.indexOf(std);
+      this.studentService.absents.splice(index, 1);
+    }
   }
 
   reloadCurrentRoute() {
     let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate([currentUrl]);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
     });
+  }
 }
-}
+
+
+
