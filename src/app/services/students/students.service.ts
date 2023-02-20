@@ -15,9 +15,6 @@ export class StudentsService {
 
   constructor() {}
 
-  // ngOnInit(){
-  //   this.transferStudents();
-  // }
 
   transferStudents(): Student[] {{
     this.students1.forEach(student =>{
@@ -27,7 +24,7 @@ export class StudentsService {
   }
 }
   getPresentStudents() : Student[] {
-    const presence = this.students.filter((std: Student) => std.here === true);
+    const presence = this.students1.filter((std: Student) => std.here === true);
     if (presence) {
       this.presentStudents = presence;
     }
@@ -42,7 +39,7 @@ export class StudentsService {
   // }
 
   getAbsentStudents() {
-    const absences = this.students.filter((std: Student) => std.here === false);
+    const absences = this.students1.filter((std: Student) => std.here === false);
     if (absences) {
       this.insertAbsentStudent(absences);
     }
