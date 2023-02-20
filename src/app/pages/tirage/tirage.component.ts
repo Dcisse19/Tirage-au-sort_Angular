@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { STUDENT, Student } from 'src/app/mocks/students.mock';
+import { StudentsService } from 'src/app/services/students/students.service';
 import { AbsentsComponent } from '../absents/absents.component';
 
 @Component({
@@ -9,31 +10,33 @@ import { AbsentsComponent } from '../absents/absents.component';
 })
 export class TirageComponent {
 
-  students: Student [] = STUDENT;
-  presentStudents: Student[] = [];
   studentsTwo: Student[] = [];
   randomStudent! : Student;
   congratsSentence!: string;
-    
+  
   constructor(
+    private studentService: StudentsService
     // private absentComponent = AbsentsComponent
-  ){ }
+    ){}
+    presentStudents:Student[] = this.studentService.presentStudents;
+  
   getRandomStudent(){
-    if(this.students.length > 0){
-      const randIndex = Math.floor(Math.random() * this.students.length);
-      this.randomStudent = this.students[randIndex];
+    console.log(this.presentStudents);
+    if(this.presentStudents.length > 0){
+      const randIndex = Math.floor(Math.random() * this.presentStudents.length);
+      this.randomStudent = this.presentStudents[randIndex];
       // console.log(this.randomStudent);
       if(this.randomStudent.genre === "female"){
         this.congratsSentence = "Tu es la grande gagnante"
       } else {
         this.congratsSentence = "Tu es le grand gagnant"      
       }
-      this.students.splice(randIndex,1);
+      this.presentStudents.splice(randIndex,1);
       this.studentsTwo.push(this.randomStudent);
       // console.log("student",this.students);
       // console.log("student2",this.studentsTwo);
     } else {
-      this.students = this.studentsTwo;
+      this.presentStudents = this.studentsTwo;
       this.studentsTwo = [];
       this.getRandomStudent();
     }

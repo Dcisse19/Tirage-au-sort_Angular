@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { StudentsService } from 'src/app/services/students/students.service';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'tirage';
+
+constructor(private studentService : StudentsService){
 }
+  ngOnInit(){
+    this.studentService.getPresentStudents();
+  }
+}
+

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { STUDENT, Student } from 'src/app/mocks/students.mock';
+import { StudentsService } from 'src/app/services/students/students.service';
 
 @Component({
   selector: 'app-absents',
@@ -16,7 +17,9 @@ export class AbsentsComponent {
   absentStudent!: Student;
   absentForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private studentService: StudentsService,
+    private formBuilder: FormBuilder,
     private router: Router) { }
 
   ngOnInit() {
@@ -52,8 +55,7 @@ export class AbsentsComponent {
         this.absentes.push(absent);
       } else if(absent.genre === "male"){
         this.absents.push(absent);
-      }
-      
+      } 
     });
   }
 
