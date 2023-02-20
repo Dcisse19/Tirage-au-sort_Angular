@@ -8,6 +8,7 @@ export class StudentsService {
 
   students: Student[] = STUDENT;
   presentStudents :Student[] = [];
+  absentStudents :Student[] = [];
    
 
   constructor() { }
@@ -19,5 +20,12 @@ export class StudentsService {
     return presence;
   }
 
+  getAbsentStudents() : Student[] {
+    const absence = this.students.filter((std: Student) => std.here === false);
+    if (absence) {
+      this.absentStudents = absence;
+    }
+    return absence;
+  }
   
 }

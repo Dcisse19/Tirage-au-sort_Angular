@@ -14,6 +14,7 @@ constructor(private studentService : StudentsService){
 }
   ngOnInit(){
     this.studentService.getPresentStudents();
+    this.studentService.getAbsentStudents();
   }
 }
 

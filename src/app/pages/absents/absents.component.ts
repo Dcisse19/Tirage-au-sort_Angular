@@ -22,10 +22,11 @@ export class AbsentsComponent {
     private router: Router) { }
 
     presentStudents: Student[] = this.studentService.presentStudents;
+    absentStudents: Student[] = this.studentService.absentStudents;
 
     ngOnInit(){
       this.initAbsentForm();
-      this.getAbsentStudents()
+      this.insertAbsentStudent();
     }
 
 
@@ -35,17 +36,8 @@ export class AbsentsComponent {
     })
   }
 
-
-  getAbsentStudents() {
-    const absence = this.students.filter((std: Student) => std.here === false);
-    console.log(absence);
-    if (absence) {
-      this.insertAbsentStudent(absence);
-    }
-  }
-
-  insertAbsentStudent(absents : Student[]){
-     absents.forEach(absent => {
+  insertAbsentStudent(){
+     this.absentStudents.forEach(absent => {
       if(absent.genre === "female"){
         this.absentes.push(absent);
       } else if(absent.genre === "male"){
@@ -55,9 +47,8 @@ export class AbsentsComponent {
   }
 
 
-
   markAbsent() {
-    const id = +this.absentForm.value.absent_name;
+    const id: number = +this.absentForm.value.absent_name;
     console.log("id absent : ",id);
     const absentStudent = this.students.find((student:Student) => student.id === id);
     if(absentStudent){
@@ -78,7 +69,6 @@ export class AbsentsComponent {
     if(student){
       student.here = true;
     }
-    this.getAbsentStudents();
     this.reloadCurrentRoute();
   }
 
